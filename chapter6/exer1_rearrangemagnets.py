@@ -6,7 +6,7 @@ def sanitize(time_string):
 		splitter = ':'
 	else:
 		return(time_string)
-	
+
 	(mins, secs) = time_string.split(splitter)
 	return(mins + '.' + secs)
 
@@ -22,7 +22,7 @@ def get_coach_data(filename):
 		return(None)
 
 sarah = get_coach_data('sarah2.txt')
-(sarah_name, sarah_dob)	= sarah.pop(0), sarah.pop(0)
-#print(sarah_name + "s fastet times are: " + str(sorted(set([sanitize(t) for t in sarah))[0:3]))
-print([sanitize(t) for t in sarah)
+(sarah_name, sarah_dob) = sarah.pop(0), sarah.pop(0)
+print(sarah_name + "s fastet times are: " + \
+      str(sorted(set([sanitize(t) for t in sarah]))[0:3]))
 
