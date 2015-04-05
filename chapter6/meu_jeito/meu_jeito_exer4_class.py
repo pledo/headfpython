@@ -8,8 +8,8 @@ class Athlete:
         self.dob = a_dob
         self.times = a_times
 
-    def top3(self):
-        return(sorted(set([sanitize(t) for t in self.times]))[0:3])
+    def top(self, times_run):
+        return(sorted(set([sanitize(t) for t in self.times]))[0:times_run])
 
 def sanitize(time_string):
     if '-' in time_string:
@@ -54,4 +54,4 @@ athlete_name = get_athlet_name(athlet_name_files)
 
 for nomo, arquivo in zip(athlete_name, athlet_name_files):
     nomo = get_coach_data(arquivo)
-    print(nomo.name + "'s fastest times are: " + str(nomo.top3()))
+    print(nomo.name + "'s fastest times are: " + str(nomo.top(3)))

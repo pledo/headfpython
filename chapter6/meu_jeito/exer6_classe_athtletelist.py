@@ -2,14 +2,15 @@
 import os
 import re
 
-class Athlete:
+class AthleteList(list):
     def __init__(self, a_name, a_dob=None, a_times=[]):
+        list.__init__([])
         self.name = a_name
         self.dob = a_dob
-        self.times = a_times
+        self.extend(a_times)
 
-    def top3(self):
-        return(sorted(set([sanitize(t) for t in self.times]))[0:3])
+    def top(self, times_run):
+        return(sorted(set([sanitize(t) for t in self]))[0:times_run])
 
 def sanitize(time_string):
     if '-' in time_string:
@@ -28,7 +29,7 @@ def get_coach_data(filename):
         with open(filename) as f:
             data = f.readline()
         templ = data.strip().split(',')
-        return(Athlete(templ.pop(0), templ.pop(0), templ))
+        return(AthleteList(templ.pop(0), templ.pop(0), templ))
     except IOError as ioerr:
         print('File error: ' + str(ioerr))
         return(None)
@@ -54,4 +55,4 @@ athlete_name = get_athlet_name(athlet_name_files)
 
 for nomo, arquivo in zip(athlete_name, athlet_name_files):
     nomo = get_coach_data(arquivo)
-    print(nomo.name + "'s fastest times are: " + str(nomo.top3()))
+    print(nomo.name + "'s fastest times are: " + str(nomo.top(3)))
